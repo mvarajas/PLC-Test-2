@@ -1,0 +1,21 @@
+void ifstmt() {
+  if (nextToken != IF_CODE)
+    error();
+  else {
+    lex();
+    if (nextToken != LEFT_PAREN)
+      error();
+    else {
+      boolexpr();
+      if (nextToken != RIGHT_PAREN)
+        error();
+      else {
+        statement();
+        if (nextToken == ELSE_CODE) {
+          lex();
+          statement();
+        }
+      }
+    }
+  }
+}

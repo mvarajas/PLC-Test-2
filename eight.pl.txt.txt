@@ -1,0 +1,23 @@
+use feature 'say';
+
+say "Hello World!";
+
+$my_grade = 'A';
+sub test {
+    return $my_grade;
+}
+sub staticc{
+    my $my_grade = 'B';
+    return test();
+}
+say "My grade after this test is a/an ", staticc();
+
+$my_new_grade = 'A';
+sub test_2 {
+    return $my_new_grade;
+}
+sub dynamicc{
+    local $my_new_grade = 'C';
+    return test_2;
+}
+say  "My grade after this test is a/an ", dynamicc();

@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+
+void static_arr() {
+  static int arr_1[111111]; //create a static array 
+}
+
+void stack_arr() {
+  int arr_2[111111];  //create an array on the stack
+}
+
+void heap_arr() {
+  int *arr_3 = (int *) calloc(111111, sizeof(int)); //create an array on the heap by allocating memory for it
+  //used calloc to initialize the memory allocated since malloc does not initialize the space
+}
+
+int main() {
+  clock_t start = clock();//getting the processor clock time as a starting point reference
+  for(int i = 0; i<111111; i++) { //loop to call the function for many times
+    static_arr();
+  }
+  clock_t end = clock();//getting the processor clock time as a end point reference at this moment the loop is finished
+  double time_spent = (double)(end - start) / CLOCKS_PER_SEC;//
+  printf("Time taken for static array was %lf seconds \n", time_spent);
+
+  start = clock();
+  for(int i = 0; i<111111; i++) {
+    stack_arr();
+  }
+  end = clock();
+  time_spent = (double)(end - start) / CLOCKS_PER_SEC;// using this to subtract the starting time from the end time to find out how long the function ran for, using the processor clock speed
+  printf("Time taken for stack array was %lf seconds \n", time_spent);
+
+  start = clock();
+  for(int i = 0; i<60000; i++) { //used 60000 instead of 111111 because I could not get an output for most numbers higher than 60000 on the online ide that I was using 
+    heap_arr();
+  }
+  end = clock();
+  time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+  printf("Time taken for heap array was %lf seconds\n", time_spent);
+
+  return 0;
+}
